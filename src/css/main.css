@@ -69,3 +69,10 @@ body {
   background-color: rgb(255, 255, 255);
   /* transition-duration: .5s; */
 }
+
+@media screen and (max-device-width:1200px) {
+  .story {
+    width: 100vw;
+    height: 90%;
+  }
+}

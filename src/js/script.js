@@ -34,7 +34,10 @@ class Stories {
         this.progressBar = setTimeout(tick, deley);
       }, deley);
     }
-    this.story.addEventListener('click', function() {
+    this.story.addEventListener('mousedown', function() {
+      stoped = !stoped;
+    });
+    this.story.addEventListener('mouseup', function() {
       stoped = !stoped;
       event.stopPropagation();
     });
