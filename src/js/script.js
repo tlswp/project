@@ -1,89 +1,98 @@
 class Stories {
-  constructor(avatarLink, StoriesLinks) {
-    this.avatarLink = avatarLink;
-    this.StoriesLinks = StoriesLinks;
-    this.createStoriesAvatar();
-    this.elementAvatar.addEventListener('click', this.showStory.bind(this));
-    var storyWr = document.querySelector('.story-wr');
-    storyWr.addEventListener('click', function(event) {
-      if (event.target.classList = 'story-wr') {
-        storyWr.classList.add('close');
-        storyWr.innerHTML = '';
-      }
-    });
+  constructor() {
+    this.storiesStore = [];
+    //this.storiesCount = 0;
   }
-  showStory() {
-    var storyWr = document.querySelector('.story-wr'),
-      story = document.createElement('div');
-    story.classList.add('story');
-    storyWr.classList.remove('close');
-    storyWr.append(story);
-    story.innerHTML = '<div class="progress-bar"><div class="progress"></div></div><img class="story-img" src="' + this.StoriesLinks + '">';
-    this.story = story;
-    window.i = 0;
-    var stoped = true;
-    if (stoped === true) {
-      var deley = 50;
-      this.progressBar = setTimeout(function tick() {
-        console.log(stoped)
-        if (i < 100 && stoped === true) {
-          i += 0.5;
-          this.progress = document.querySelector('.progress');
-          this.progress.style.width = i + '%';
-        }
-        this.progressBar = setTimeout(tick, deley);
-      }, deley);
-    }
-    this.story.addEventListener('mousedown', function() {
-      stoped = !stoped;
-    });
-    this.story.addEventListener('mouseup', function() {
-      stoped = !stoped;
-      event.stopPropagation();
-    });
-    // storyWr.addEventListener('click', function(event) {
-    //   if (event.target.classList = 'story-wr') {
-    //     storyWr.classList.add('close');
-    //   }
-    // });
-  }
-  createStoriesAvatar() {
+  createStory(avatarSrc, storiesSrc) {
+    this.storiesStore.push({ avatarSrc: avatarSrc, storiesSrc: storiesSrc });
+    var progressBars = [],
+      storySelected = 0,
+      progressCount = 0,
+      sec = 0,
+      progressInterval,
+      progressIntervalDelay;
     var storiesAvatarsWr = document.querySelector('.stories-avatars-wr'),
+      progressBarWr = document.createElement('div'),
+      storyImg = document.createElement('img'),
       storyAvatarWr = document.createElement('div');
+    var storyWr = document.querySelector('.story-wr');
+    var story = document.createElement('div');
+    for (var storyCount = 0; storyCount < storiesSrc.length; storyCount++) {
+      var progressBar = document.createElement('div'),
+        progress = document.createElement('div');
+      progressBars.push(progress);
+      progressBar.append(progressBars[storyCount]);
+      progressBar.classList.add('progress-bar');
+      progressBars[storyCount].classList.add('progress');
+      progressBarWr.append(progressBar);
+    }
     storyAvatarWr.classList.add('story-avatar-wr');
+    progressBarWr.classList.add('progress-bar-wr');
+    storyImg.classList.add('story-img');
+    var stopped = true;
+    story.classList.add('story');
+    storyImg.setAttribute('src', storiesSrc[storySelected]);
     storiesAvatarsWr.append(storyAvatarWr);
-    storyAvatarWr.innerHTML = '<img class="story-avatar" src="' + this.avatarLink + '">';
-    this.elementAvatar = storyAvatarWr;
+    storyAvatarWr.innerHTML = '<img class="story-avatar" src="' + avatarSrc + '">';
+    storyAvatarWr.addEventListener('click', function() {
+      stopped = true;
+      storyWr.append(story);
+      story.append(progressBarWr);
+      story.append(storyImg);
+      storyWr.classList.remove('close');
+
+      function closeStory() {
+        for (var progressBarsCount = 0; progressBarsCount < progressBars.length; progressBarsCount++) {
+          progressBars[progressBarsCount].style.width = 0 + '%';
+        }
+        document.querySelector('.story-wr').innerHTML = '';
+        document.querySelector('.story-wr').classList.add('close');
+        storySelected = 0;
+        progressCount = 0;
+        stopped = false;
+        clearInterval(progressInterval);
+      }
+      storyWr.addEventListener('mousedown', function() {
+        closeStory();
+      })
+      story.addEventListener('mousedown', function() {
+        sec = 0;
+        console.log(progressBars.length);
+        progressIntervalDelay = setInterval(() => {
+          sec += 0.01;
+        }, 1);
+        stopped = false;
+        event.stopPropagation();
+      })
+      story.addEventListener('mouseup', function() {
+        clearInterval(progressIntervalDelay);
+        if (sec > 0.5) {
+          stopped = true;
+          event.stopPropagation();
+        } else {
+          closeStory();
+        }
+      })
+      progressInterval = setInterval(function() {
+        if (stopped) {
+          progressCount += 0.5;
+          if (progressCount <= 100) {
+            //this.progress = document.querySelector('.progress');
+            progressBars[storySelected].style.width = progressCount + '%';
+          }
+          if (progressCount === 100 && storySelected < storiesSrc.length - 1) {
+            storySelected += 1;
+            storyImg.setAttribute('src', storiesSrc[storySelected]);
+            progressCount = 0;
+          }
+          if (progressCount === 100 && storySelected === storiesSrc.length - 1) {
+            closeStory();
+          }
+        }
+      }, 50);
+    })
   }
 }
-var story = new Stories('img/CyberDima.jpg', 'img/BAN.png');
-var story2 = new Stories('img/CyberDima.jpg', 'img/CyberDima.jpg');
-
-// function showStory() {
-//   var storyWr = document.querySelector('.story-wr'),
-//     storyAvatarWr = document.createElement('div');
-//   storyAvatarWr.classList.add('story');
-//   storyWr.classList.remove('close');
-//   storyWr.append(storyAvatarWr);
-//   storyAvatarWr.innerHTML = '<img class="story-img" src="' + 'img/CyberDima.jpg' + '">';
-// }
-// var storyWr = document.querySelector('.story-wr');
-// storyWr.addEventListener('click', function(event) {
-//   if (event.target.classList = 'story-wr') {
-//     storyWr.classList.add('close');
-//   }
-// });
-
-// var progressBar = setTimeout(function tick() {
-//   if (i < 100) {
-//     i += 1;
-//     var progress = document.querySelector('.progress');
-//     progress.style.width = i + '%';
-//     progressBar = setTimeout(tick, 100);
-//   }
-// }, 100);
-
-
-window.onload = function() {
-
-}
+var story = new Stories();
+story.createStory('img/avatars/CyberDima.jpg', ['img/BAN.png', 'img/dbaner.png']);
+story.createStory('img/avatars/CyberDima.jpg', ['img/dbaner.png', 'img/BAN.png', 'img/dbaner.png']);

@@ -70,6 +70,11 @@ body {
   /* transition-duration: .5s; */
 }
 
+.progress-bar-wr {
+  display: flex;
+  width: 100%;
+}
+
 @media screen and (max-device-width:1200px) {
   .story {
     width: 100vw;
