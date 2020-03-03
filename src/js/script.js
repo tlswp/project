@@ -41,6 +41,16 @@ class Stories {
       story.append(storyImg);
       storyWr.classList.remove('close');
 
+      function startSrory() {
+        sec = 0;
+        console.log(progressBars.length);
+        progressIntervalDelay = setInterval(() => {
+          sec += 0.01;
+        }, 1);
+        stopped = false;
+        event.stopPropagation();
+      }
+
       function closeStory() {
         for (var progressBarsCount = 0; progressBarsCount < progressBars.length; progressBarsCount++) {
           progressBars[progressBarsCount].style.width = 0 + '%';
@@ -56,13 +66,7 @@ class Stories {
         closeStory();
       })
       story.addEventListener('mousedown', function() {
-        sec = 0;
-        console.log(progressBars.length);
-        progressIntervalDelay = setInterval(() => {
-          sec += 0.01;
-        }, 1);
-        stopped = false;
-        event.stopPropagation();
+        startSrory();
       })
       story.addEventListener('mouseup', function() {
         clearInterval(progressIntervalDelay);
@@ -80,12 +84,12 @@ class Stories {
             //this.progress = document.querySelector('.progress');
             progressBars[storySelected].style.width = progressCount + '%';
           }
-          if (progressCount === 100 && storySelected < storiesSrc.length - 1) {
+          if (progressCount > 100 && storySelected < storiesSrc.length - 1) {
             storySelected += 1;
             storyImg.setAttribute('src', storiesSrc[storySelected]);
             progressCount = 0;
           }
-          if (progressCount === 100 && storySelected === storiesSrc.length - 1) {
+          if (progressCount > 100 && storySelected === storiesSrc.length - 1) {
             closeStory();
           }
         }

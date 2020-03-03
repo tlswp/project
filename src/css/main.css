@@ -58,9 +58,11 @@ body {
 
 .progress-bar {
   width: 98%;
-  height: 1vh;
+  height: 0.5vh;
   margin: 1%;
   background-color: rgb(177, 177, 177);
+  overflow: hidden;
+  border-radius: 1vh;
 }
 
 .progress {
