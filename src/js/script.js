@@ -147,6 +147,7 @@ function createStory(avatarSrc, storiesSrc) {
   var stopped = true;
   story.classList.add('story');
   storyImg.setAttribute('src', storiesSrc[storySelected]);
+  storyImg.setAttribute('draggable', false);
   storiesAvatarsWr.append(storyAvatarWr);
   storyAvatarWr.innerHTML = '<img class="story-avatar" src="' + avatarSrc + '">';
   story.append(progressBarWr);
@@ -176,6 +177,7 @@ function createStory(avatarSrc, storiesSrc) {
   };
 
   function startSrory() {
+    document.body.classList.add('scroll-lock');
     sec = 0;
     progressIntervalDelay = setInterval(() => {
       sec += 0.01;
@@ -204,6 +206,7 @@ function createStory(avatarSrc, storiesSrc) {
     startSrory();
   })
   story.addEventListener('touchend', function() {
+    document.body.classList.remove('scroll-lock');
     clearInterval(progressIntervalDelay);
     if (sec > 0.5) {
       stopped = true;
@@ -224,7 +227,7 @@ function createStory(avatarSrc, storiesSrc) {
   story.addEventListener('mousedown', function() {
     startSrory();
   })
-  story.addEventListener('mouseup', function() {
+  storyWr.addEventListener('mouseup', function() {
     clearInterval(progressIntervalDelay);
     if (sec > 0.5) {
       stopped = true;

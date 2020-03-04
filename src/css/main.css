@@ -83,3 +83,7 @@ body {
     height: 90%;
   }
 }
+
+.scroll-lock {
+  overflow: hidden !important;
+}
