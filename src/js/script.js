@@ -153,7 +153,7 @@ function storyEvents(Id, st = false) {
     progressInterval = setInterval(function() {
       if (stopped) {
         progressCount += 0.5;
-        if (progressCount <= 100) {
+        if (progressCount <= 101) {
           //this.progress = document.querySelector('.progress');
           progressBars[storySelected].style.width = progressCount + '%';
         }
@@ -209,7 +209,7 @@ function storyEvents(Id, st = false) {
     } else {
       stopped = true;
       //nextStory = true;
-      progressCount = 99;
+      progressCount = 100;
     }
     event.stopPropagation();
   })
@@ -230,7 +230,7 @@ function storyEvents(Id, st = false) {
       } else {
         stopped = true;
         //nextStory = true;
-        progressCount = 99;
+        progressCount = 100;
       }
       event.stopPropagation();
     })
@@ -296,4 +296,4 @@ function createStory(avatarSrc, storiesSrc) {
 }
 
 createStory('img/avatars/CyberDima.jpg', ['img/dbaner.png', 'img/cs.jpg', 'img/ds.jpg']);
-createStory('img/avatars/186452.jpg', ['img/krossovki.jpg', 'img/186452.jpg', 'img/30.jpg', 'img/dbaner.png']);
+createStory('img/avatars/186452.jpg', ['img/Krossovki.jpg', 'img/186452.jpg', 'img/30.jpg', 'img/dbaner.png']);
