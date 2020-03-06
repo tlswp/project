@@ -164,9 +164,9 @@ function storyEvents(Id, st = false) {
         }
         if (progressCount > 100 && storySelected === storiesSrc.length - 1) {
           closeStory();
-          // if (Id < storiesStore.length - 1) {
-          //   storyEvents(Id + 1, true);
-          // }
+          if (Id < storiesStore.length - 1) {
+            storyEvents(Id + 1, true);
+          }
         }
       }
     }, 50);
@@ -224,20 +224,20 @@ function storyEvents(Id, st = false) {
     startSrory();
   })
   storyWr.addEventListener('mouseup', function() {
-      clearInterval(progressIntervalDelay);
-      if (sec > 0.5) {
-        stopped = true;
-      } else {
-        stopped = true;
-        //nextStory = true;
-        progressCount = 100;
-      }
-      event.stopPropagation();
-    })
-    // if (st) {
-    //   openStory();
-    //   // alert(1);
-    // }
+    clearInterval(progressIntervalDelay);
+    if (sec > 0.5) {
+      stopped = true;
+    } else {
+      stopped = true;
+      //nextStory = true;
+      progressCount = 100;
+    }
+    event.stopPropagation();
+  })
+  if (st) {
+    openStory();
+    // alert(1);
+  }
 }
 
 function createStory(avatarSrc, storiesSrc) {
