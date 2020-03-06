@@ -173,7 +173,7 @@ function storyEvents(Id, st = false) {
   };
 
   function startSrory() {
-    document.body.classList.add('scroll-lock');
+    //document.body.classList.add('scroll-lock');
     sec = 0;
     progressIntervalDelay = setInterval(() => {
       sec += 0.01;
@@ -195,24 +195,24 @@ function storyEvents(Id, st = false) {
     clearInterval(progressInterval);
     clearInterval(progressIntervalDelay);
   }
-  storyWr.addEventListener('touchstart', function() {
-    closeStory();
-  })
-  story.addEventListener('touchstart', function() {
-    startSrory();
-  })
-  story.addEventListener('touchend', function() {
-    document.body.classList.remove('scroll-lock');
-    clearInterval(progressIntervalDelay);
-    if (sec > 0.5) {
-      stopped = true;
-    } else {
-      stopped = true;
-      //nextStory = true;
-      progressCount = 100;
-    }
-    event.stopPropagation();
-  })
+  // storyWr.addEventListener('touchstart', function() {
+  //   closeStory();
+  // })
+  // story.addEventListener('touchstart', function() {
+  //   startSrory();
+  // })
+  // story.addEventListener('touchend', function() {
+  //   //document.body.classList.remove('scroll-lock');
+  //   clearInterval(progressIntervalDelay);
+  //   if (sec > 0.5) {
+  //     stopped = true;
+  //   } else {
+  //     stopped = true;
+  //     //nextStory = true;
+  //     progressCount = 100;
+  //   }
+  //   event.stopPropagation();
+  // })
 
   storyAvatarWr.addEventListener('click', function() {
     openStory();
