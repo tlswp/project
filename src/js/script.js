@@ -297,3 +297,4 @@ function createStory(avatarSrc, storiesSrc) {
 
 createStory('img/avatars/CyberDima.jpg', ['img/dbaner.png', 'img/cs.jpg', 'img/ds.jpg']);
 createStory('img/avatars/186452.jpg', ['img/Krossovki.jpg', 'img/186452.jpg', 'img/30.jpg', 'img/dbaner.png']);
+createStory('img/avatars/a3.jpg', ['img/nightCity.png', 'img/cyb.jpg']);
