@@ -54,6 +54,8 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 1vw;
+  overflow: hidden;
 }
 
 .progress-bar {
@@ -61,15 +63,20 @@ body {
   height: 0.5vh;
   margin: 1%;
   background-color: rgb(177, 177, 177);
+  border-radius: 0.5vw !important;
   overflow: hidden;
-  border-radius: 1vh;
 }
 
 .progress {
+  border-radius: 1vw !important;
   width: 0%;
   height: 100%;
   background-color: rgb(255, 255, 255);
   /* transition-duration: .5s; */
+}
+
+.full {
+  width: 100% !important;
 }
 
 .progress-bar-wr {
