@@ -113,6 +113,9 @@ function StoryView(stories, userNum) {
   document.querySelector('.story-wr').innerHTML = '<div class="story"><div class="progress-bar-wr">' + progressBars + '</div><img src="' +
     stories[storySelected] + '" draggable="false" class="story-img"></div>';
   document.querySelector('.story-wr').classList.remove('close');
-  progress(stories, userNum);
+  var img = document.querySelector('.story-img');
+  img.onload = function() {
+    progress(stories, userNum);
+  }
 }
 updateStoriesList(StoriesList);
