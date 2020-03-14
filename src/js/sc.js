@@ -2,8 +2,11 @@ var StoriesList = [{
   storyAvatar: 'img/avatars/CyberDima.jpg',
   stories: ['img/dbaner.png', 'img/cs.jpg', 'img/ds.jpg']
 }, {
-  storyAvatar: 'img/avatars/CyberDima.jpg',
-  stories: ['img/dbaner.png', 'img/ds.jpg']
+  storyAvatar: 'img/avatars/186452.jpg',
+  stories: ['img/Krossovki.jpg', 'img/186452.jpg', 'img/30.jpg', 'img/dbaner.png']
+}, {
+  storyAvatar: 'img/avatars/a3.jpg',
+  stories: ['img/nightCity.png', 'img/cyb.jpg']
 }]
 var stoppedStory = false,
   progressCount = 0,
