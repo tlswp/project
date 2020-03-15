@@ -1,4 +1,4 @@
-var StoriesList = [{
+var storiesList = [{
   storyAvatar: 'img/avatars/CyberDima.jpg',
   stories: ['img/dbaner.png', 'img/cs.jpg', 'img/ds.jpg']
 }, {
@@ -13,7 +13,29 @@ var stoppedStory = false,
   storySelected = 0,
   sec,
   closedStory = false,
-  prog;
+  prog, storiesAvatarWr;
+document.body.innerHTML = '<div class="stories-avatars-wr"></div><div class="story-wr close"></div>';
+storiesAvatarWr = document.querySelector('.stories-avatars-wr');
+storiesAvatarWr.addEventListener('click', function(event) {
+  var story = event.target;
+  if (story.tagName === 'IMG') {
+    StoryView(story.getAttribute('data-stories').split(','), +story.getAttribute('data-user'));
+  }
+})
+
+function addUser(storyAvatar, stories) {
+  storiesList.push({
+    storyAvatar: storyAvatar,
+    stories: stories
+  })
+  updatestoriesList(storiesList);
+}
+//addUser('img/avatars/CyberDima.jpg', ['img/dbaner.png', 'img/cs.jpg', 'img/ds.jpg']);
+function addStory(userNum, stories) {
+  storiesList[userNum].stories = storiesList[userNum].stories.concat(stories);
+  updatestoriesList(storiesList);
+}
+//addStory(1, ['img/dbaner.png', 'img/cs.jpg', 'img/ds.jpg']);
 
 function closeStory() {
   stoppedStory = true;
@@ -26,7 +48,6 @@ function closeStory() {
 }
 
 function startSrory() {
-  //document.body.classList.add('scroll-lock');
   sec = 0;
   progressIntervalDelay = setInterval(() => {
     sec += 0.01;
@@ -39,9 +60,6 @@ function progress(stories, userNum) {
   stoppedStory = false;
   prog = document.querySelectorAll('.progress');
   progressInterval = setInterval(function() {
-    if (stoppedStory) {
-
-    }
     if (!stoppedStory) {
       progressCount += 0.1;
       prog[storySelected].style.width = progressCount + '%';
@@ -54,51 +72,26 @@ function progress(stories, userNum) {
         } else {
           closeStory();
           userNum += 1;
-          if (userNum < StoriesList.length) {
-            StoryView(StoriesList[userNum].stories, userNum);
+          if (userNum < storiesList.length) {
+            StoryView(storiesList[userNum].stories, userNum);
           }
         }
       }
     }
   }, 1)
-  story = document.querySelector('.story');
-  storyWr = document.querySelector('.story-wr');
-  storyWr.addEventListener('mousedown', function() {
-    closeStory();
-  })
-  story.addEventListener('mousedown', function() {
-    startSrory();
-  })
-  storyWr.addEventListener('mouseup', function() {
-    clearInterval(progressIntervalDelay);
-    if (sec > 0.5) {
-      stoppedStory = false;
-    } else {
-      stoppedStory = false;
-      //nextStory = true;
-      progressCount = 100;
-    }
-    event.stopPropagation();
-  })
+
 }
 
-function updateStoriesList(StoriesList) {
-  var storiesAvatarWr = document.querySelector('.stories-avatars-wr'),
-    storiesListElem = '';
-  for (var userNum = 0; userNum < StoriesList.length; userNum++) {
-    var avatarLink = StoriesList[userNum].storyAvatar,
-      stories = StoriesList[userNum].stories;
-    storiesListElem += '<div class="story-avatar-wr"><img class="story-avatar" draggable="false" data-user="' + userNum + '" data-stories="' +
+function updatestoriesList(storiesList) {
+  var storiesListElem = '';
+  for (var userNum = 0; userNum < storiesList.length; userNum++) {
+    var avatarLink = storiesList[userNum].storyAvatar,
+      stories = storiesList[userNum].stories;
+    storiesListElem += '<div class="story-avatar-wr"><img class="story-avatar" draggable="false" data-user="' +
+      userNum + '" data-stories="' +
       stories.toString() + '" src="' + avatarLink + '"></div>';
   }
   storiesAvatarWr.innerHTML = storiesListElem;
-  storiesAvatarWr.tagName;
-  storiesAvatarWr.addEventListener('click', function(event) {
-    var story = event.target;
-    if (story.tagName === 'IMG') {
-      StoryView(story.getAttribute('data-stories').split(','), +story.getAttribute('data-user'));
-    }
-  })
 }
 
 function StoryView(stories, userNum) {
@@ -117,5 +110,23 @@ function StoryView(stories, userNum) {
   img.onload = function() {
     progress(stories, userNum);
   }
+  story = document.querySelector('.story');
+  storyWr = document.querySelector('.story-wr');
+  storyWr.addEventListener('mousedown', function() {
+    closeStory();
+  })
+  story.addEventListener('mousedown', function() {
+    startSrory();
+  })
+  storyWr.addEventListener('mouseup', function() {
+    clearInterval(progressIntervalDelay);
+    if (sec > 0.5) {
+      stoppedStory = false;
+    } else {
+      stoppedStory = false;
+      progressCount = 100;
+    }
+    event.stopPropagation();
+  })
 }
-updateStoriesList(StoriesList);
+updatestoriesList(storiesList);
