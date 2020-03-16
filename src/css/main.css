@@ -1,7 +1,6 @@
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  /* overflow: hidden; */
 }
 
 .story-avatar-wr {
@@ -72,7 +71,6 @@ body {
   width: 0%;
   height: 100%;
   background-color: rgb(255, 255, 255);
-  /* transition-duration: .5s; */
 }
 
 .full {
@@ -84,7 +82,7 @@ body {
   width: 100%;
 }
 
-@media screen and (max-device-width:1200px) {
+@media screen and (max-device-width: 1200px) {
   .story {
     width: 100vw;
     height: 90%;
