@@ -4,36 +4,54 @@ document.body.innerHTML =
   '<div class="story-wr close"></div>';
 var storiesAvatarsWr = document.querySelector('.stories-avatars-wr'),
   storyWr = document.querySelector('.story-wr');
-var storiesList = [{
-  storyAvatar: 'img/avatars/CyberDima.jpg',
-  stories: ['img/dbaner.png', 'img/cs.jpg', 'img/ds.jpg']
-}, {
-  storyAvatar: 'img/avatars/186452.jpg',
-  stories: ['img/Krossovki.jpg', 'img/186452.jpg', 'img/30.jpg', 'img/dbaner.png']
-}, {
-  storyAvatar: 'img/avatars/a3.jpg',
-  stories: ['img/nightCity.png', 'img/cyb.jpg']
-}];
+var storiesList = [
+  {
+    storyAvatar: './img/CyberDima.jpg',
+    stories: ['./img/30.jpg', './img/nightCity.png'],
+  },
+  {
+    storyAvatar: './img/computer.png',
+    stories: [
+      './img/bot.jpg',
+    ],
+  },
+  {
+    storyAvatar: './img/a.jpg',
+    stories: ['./img/park.jpg', './img/park2.jpg', './img/park3.jpg'],
+  },
+];
 
-function ren() {
+function render(storiesList) {
   var storiesListElem = '';
   for (var userNum = 0; userNum < storiesList.length; userNum++) {
     var avatarLink = storiesList[userNum].storyAvatar,
       stories = storiesList[userNum].stories;
-    storiesListElem += '<story-preview class="story-avatar-wr" data-user="' +
-      userNum + '" data-stories="' + [stories] + '" src="' + avatarLink + '"></story-preview>';
+    storiesListElem +=
+      '<story-preview class="story-avatar-wr" data-user="' +
+      userNum +
+      '" data-stories="' +
+      [stories] +
+      '" src="' +
+      avatarLink +
+      '"></story-preview>';
   }
-  //storiesListElem = '<progress-bar quantity="5" story-selected="3" fullness="50"></progress-bar>'
   storiesAvatarsWr.innerHTML = storiesListElem;
 }
-ren();
+render(storiesList);
 var stoppedStory;
 
 function storyView(stories, storySelected) {
   storyWr.classList.remove('close');
-  storyWr.innerHTML = '<story-view src="' + stories[storySelected] + '" fullness="' + 0 +
-    '" story-selected="' + storySelected + '" quantity="' +
-    stories.length + '" stories ></story-view>';
+  storyWr.innerHTML =
+    '<story-view src="' +
+    stories[storySelected] +
+    '" fullness="' +
+    0 +
+    '" story-selected="' +
+    storySelected +
+    '" quantity="' +
+    stories.length +
+    '" stories ></story-view>';
 }
 
 function processingStories(stories, userNum) {
@@ -49,7 +67,9 @@ function processingStories(stories, userNum) {
     storySelected = 0;
     progressCount = 0;
     clearInterval(progressInterval);
-    document.querySelector('.story-wr').removeEventListener('mousedown', closeStory);
+    document
+      .querySelector('.story-wr')
+      .removeEventListener('mousedown', closeStory);
   }
 
   function startSrory() {
@@ -61,7 +81,6 @@ function processingStories(stories, userNum) {
       stoppedStory = true;
       event.stopPropagation();
     }
-    //document.querySelector('.story').removeEventListener('mousedown', startSrory);
   }
 
   function clos() {
@@ -78,8 +97,8 @@ function processingStories(stories, userNum) {
     document.querySelector('.story').removeEventListener('mouseup', clos);
   }
   storyView(stories, storySelected);
-  document.querySelector('.story-img').onload = function() {
-    progressInterval = setInterval(function() {
+  document.querySelector('.story-img').onload = function () {
+    progressInterval = setInterval(function () {
       var story = document.querySelector('.story'),
         storyWr = document.querySelector('.story-wr');
       storyWr.addEventListener('mousedown', closeStory);
@@ -95,7 +114,9 @@ function processingStories(stories, userNum) {
       }
       if (!stoppedStory) {
         progressCount += 0.1;
-        document.querySelector('progress-bar').setAttribute('fullness', progressCount);
+        document
+          .querySelector('progress-bar')
+          .setAttribute('fullness', progressCount);
         if (progressCount > 100) {
           progressCount = 0;
           storySelected += 1;
@@ -107,7 +128,7 @@ function processingStories(stories, userNum) {
     }, 1);
   };
 }
-storiesAvatarsWr.addEventListener('click', function(event) {
+storiesAvatarsWr.addEventListener('click', function (event) {
   var story = event.target.closest('story-preview');
   if (!story) return;
   var stories = story.getAttribute('data-stories').split(','),

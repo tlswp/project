@@ -6,15 +6,17 @@ class Progress extends HTMLElement {
         progress += '<div class="progress-bar"><div class="progress full"></div></div>';
       }
       if (progressNum === +this.getAttribute('story-selected')) {
-        progress += '<div class="progress-bar"><div style="width:' + this.getAttribute('fullness') +
-          '%" class="progress"></div></div>';
+        progress +=
+          `<div class="progress-bar">
+            <div style="width:${this.getAttribute('fullness')}%" class="progress"></div>
+          </div>`;
       }
       if (progressNum > +this.getAttribute('story-selected')) {
         progress += '<div class="progress-bar"><div class="progress"></div></div>';
       }
     }
     this.innerHTML =
-      '<div class="progress-bar-wr">' + progress + '</div>';
+      `<div class="progress-bar-wr">${progress}</div>`;
   }
   connectedCallback() {
     this.render();
@@ -23,11 +25,8 @@ class Progress extends HTMLElement {
     return ['quantity', 'story-selected', 'fullness'];
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    name = name;
-    oldValue = oldValue;
-    newValue = newValue;
+  attributeChangedCallback() {
     this.render();
   }
 }
-customElements.define('progress-bar', Progress);
+window.customElements.define('progress-bar', Progress);

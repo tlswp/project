@@ -4,8 +4,8 @@ class StoryPreview extends HTMLElement {
     super();
   }
   render() {
-    this.innerHTML = '<img class="story-avatar" draggable="false" src="' +
-      this.getAttribute('src') + '">';
+    this.innerHTML =
+      `<img class="story-avatar" draggable="false" src="${this.getAttribute('src')}">`;
   }
   connectedCallback() {
     this.render();
@@ -14,11 +14,8 @@ class StoryPreview extends HTMLElement {
     return ['src', 'data-stories', 'data-user'];
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    name = name;
-    oldValue = oldValue;
-    newValue = newValue;
+  attributeChangedCallback() {
     this.render();
   }
 }
-customElements.define('story-preview', StoryPreview);
+window.customElements.define('story-preview', StoryPreview);

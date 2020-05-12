@@ -1,3 +1,12 @@
+import './img/CyberDima.jpg';
+import './img/computer.png';
+import './img/a.jpg';
+import './img/30.jpg';
+import './img/nightCity.png';
+import './img/bot.jpg';
+import './img/park.jpg';
+import './img/park2.jpg';
+import './img/park3.jpg';
 import './css/main.css';
 import './js/StoryPreview.js';
 import './js/StoryView.js';
